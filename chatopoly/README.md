@@ -21,3 +21,9 @@ El tablero se puede exportar/importar en `.json` para reutilizarlo o compartirlo
 ## Privacidad
 
 El chat se procesa solo en el navegador. No se envía a ningún servidor. La partida en curso se guarda en `localStorage` del dispositivo.
+
+## Edición Quexinopoly 3D
+
+`quexines/index.html`: tablero fijo en 3D (three.js) construido con el lore del grupo QUEXINES: Villa Jávea, Oficinas de Motorsportive, El Garitaso de NanoCasas, Oficinas de EFS, UADB, la Charca, la Lista de Washed y la Copa TikTok. Fichas con forma de F1, dados 3D y cartas «POLL» y «Audio de NanoCasas» sacadas de frases reales del chat.
+
+Necesita conexión para cargar three.js desde jsDelivr.
