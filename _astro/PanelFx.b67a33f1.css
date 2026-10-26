@@ -62,33 +62,25 @@ html.fx-musica #fxMusica{opacity:1}
 @media (prefers-reduced-motion:reduce){.lx-panel .lx-tile.lx-pop[aria-pressed=true]::after,.lx-panel .lx-tile.lx-pop[aria-pressed=true] .lx-tile-icon,.lx-rec i,#fxMusica::before{animation:none!important}#fxPersianas .lx-lamas,.lx-fx{transition-duration:.01s}}
 
 /* ===== Pared de la casa (queda bajo los efectos: se oscurece, la tapan las persianas…) ===== */
-.lx-pared-col{position:relative;padding:56px 46px 96px}
-.lx-pared{position:absolute;inset:0;border-radius:28px;overflow:hidden;pointer-events:none;
+.lx-pared-col{position:relative;padding:76px 50px 44px}
+.lx-pared{position:absolute;inset:0 -70px -10px;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent),linear-gradient(180deg,transparent,#000 9%,#000 80%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent),linear-gradient(180deg,transparent,#000 9%,#000 80%,transparent);mask-composite:intersect;
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .22 0 0 0 -.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0 -.18'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"),
-    linear-gradient(180deg,#665e55 0%,#544d46 55%,#433d37 100%);
-  box-shadow:inset 0 0 90px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.05)}
+    linear-gradient(180deg,#4a443e 0%,#3d3833 55%,#2f2b27 100%);
+  }
 /* Bañadores de luz desde el techo (siguen la intensidad del slider) */
-.lx-pared-luz{position:absolute;top:0;width:48%;height:88%;mix-blend-mode:screen;opacity:var(--lx-pared,.85);transition:opacity .6s ease;
-  background:radial-gradient(ellipse 48% 100% at 50% 0%,rgba(255,226,178,.62),rgba(255,212,156,.24) 42%,rgba(255,212,156,.06) 62%,transparent 78%)}
-.lx-pared-luz::before{content:"";position:absolute;top:-3px;left:50%;width:26px;height:7px;transform:translateX(-50%);border-radius:50%;background:#fff6e2;box-shadow:0 0 14px 5px rgba(255,228,180,.7)}
-.lx-pared-luz1{left:-8%}
-.lx-pared-luz2{right:-8%}
-html.lx-arrastrando .lx-pared-luz{transition-duration:.12s}
+.lx-pared-luz{position:absolute;top:0;width:34%;height:96%;mix-blend-mode:screen;opacity:var(--lx-pared,.85);transition:opacity .6s ease;background:radial-gradient(ellipse 14% 9% at 50% 6%,rgba(255,240,215,.55),transparent 100%),radial-gradient(ellipse 42% 72% at 50% 0%,rgba(255,226,178,.55),rgba(255,212,156,.2) 45%,rgba(255,212,156,.05) 70%,transparent 85%)}
+.lx-pared-luz::before{content:"";position:absolute;top:8px;left:50%;width:26px;height:7px;transform:translateX(-50%);border-radius:50%;background:#fff6e2;box-shadow:0 0 14px 5px rgba(255,228,180,.7)}
+.lx-pared-luz1{left:1%}
+.lx-pared-luz2{right:1%}
+html.lx-arrastrando .lx-pared-luz{position:absolute;top:0;width:34%;height:96%;mix-blend-mode:screen;opacity:var(--lx-pared,.85);transition:opacity .6s ease;background:radial-gradient(ellipse 14% 9% at 50% 6%,rgba(255,240,215,.55),transparent 100%),radial-gradient(ellipse 42% 72% at 50% 0%,rgba(255,226,178,.55),rgba(255,212,156,.2) 45%,rgba(255,212,156,.05) 70%,transparent 85%)}
 /* Interruptor con piloto de orientación (se enciende a oscuras) */
-.lx-interruptor{position:absolute;right:12px;top:46%;width:30px;height:30px;border-radius:5px;background:linear-gradient(160deg,#f0ece5,#d4cec4);box-shadow:0 4px 8px rgba(0,0,0,.45),inset 0 1px 0 #fff}
+.lx-interruptor{position:absolute;right:86px;top:52%;width:30px;height:30px;border-radius:5px;background:linear-gradient(160deg,#f0ece5,#d4cec4);box-shadow:0 4px 8px rgba(0,0,0,.45),inset 0 1px 0 #fff}
 .lx-interruptor i{position:absolute;inset:6px;border-radius:3px;background:linear-gradient(180deg,#f7f4ef,#e2ddd4);box-shadow:0 1px 2px rgba(0,0,0,.25)}
 .lx-interruptor i::after{content:"";position:absolute;left:50%;bottom:3px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#bfb9ae;transition:all .4s}
 html.lx-oscuro .lx-interruptor i::after{background:#38bdf8;box-shadow:0 0 6px 1px #38bdf8}
-/* Rodapié y suelo de madera */
-.lx-rodapie{position:absolute;left:0;right:0;bottom:46px;height:12px;background:linear-gradient(180deg,#ebe7e0,#cbc5ba);box-shadow:0 -1px 0 rgba(0,0,0,.25),0 3px 5px rgba(0,0,0,.4)}
-.lx-suelo{position:absolute;left:0;right:0;bottom:0;height:46px;background:
-  repeating-linear-gradient(90deg,rgba(0,0,0,.22) 0 1px,transparent 1px 132px),
-  repeating-linear-gradient(90deg,transparent 0 66px,rgba(0,0,0,.12) 66px 67px,transparent 67px 132px) 0 23px/100% 23px no-repeat,
-  linear-gradient(0deg,rgba(0,0,0,.25) 0 1px,transparent 1px) 0 22px/100% 1px no-repeat,
-  linear-gradient(180deg,#7a5537,#5b3d26 60%,#4a3120)}
-.lx-suelo::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 120% at 50% 0%,rgba(255,220,170,.18),transparent 70%);opacity:var(--lx-pared,.85);transition:opacity .6s}
+
 
 /* ===== iPad ===== */
 .lx-panel.lx-ipad{--ipad-sombra:0 0 0 1px rgba(0,0,0,.55),0 42px 70px -22px rgba(0,0,0,.8),0 16px 28px -8px rgba(0,0,0,.55);
@@ -109,11 +101,10 @@ html.fx-musica .lx-panel.lx-ipad::before{top:-30px}
 html.fx-musica .lx-panel.lx-ipad::after{top:-30px}
 
 @media (max-width:640px){
-  .lx-pared-col{padding:30px 12px 74px}
-  .lx-pared{border-radius:20px}
+  .lx-pared-col{padding:54px 10px 26px}
+  .lx-pared{inset:0 -16px -8px}
+  .lx-pared-luz{width:44%}
   .lx-interruptor{display:none}
-  .lx-rodapie{bottom:34px;height:9px}
-  .lx-suelo{height:34px}
   .lx-panel.lx-ipad{padding:11px;border-radius:32px;border-width:3px}
   html .lx-panel.lx-ipad{border-radius:32px}
   .lx-ipad>div{border-radius:20px!important;padding:16px!important}
