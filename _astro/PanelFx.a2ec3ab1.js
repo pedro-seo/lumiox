@@ -76,6 +76,8 @@
     const osc = oscuridad(e);
     root.classList.toggle('fx-luz', osc > 0);
     root.classList.toggle('lx-linterna', canHover && !e.luz);
+    root.classList.toggle('lx-oscuro', !e.luz);
+    root.style.setProperty('--lx-pared', e.luz ? (0.2 + (0.8 * nivel) / 100).toFixed(3) : '0');
     fxLuz.style.opacity = osc.toFixed(3);
     fxBrillo.style.opacity = e.luz ? Math.max(0, (nivel - 80) / 20).toFixed(3) : '0';
     if (flick && ultimaOsc !== null && !reduce && Math.abs(osc - ultimaOsc) > 0.5) parpadeo(fxLuz, ultimaOsc, osc);
