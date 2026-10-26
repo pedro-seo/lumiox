@@ -1,0 +1,62 @@
+/* Panel de control del hero: overrides y efectos nuevos (se carga después de CtaFinal.css) */
+
+/* Rendimiento: las capas inactivas no animan */
+.lx-fx *,.lx-fx::before,.lx-fx::after,.lx-fx *::before,.lx-fx *::after{animation-play-state:paused}
+html.fx-luz #fxLuz,html.fx-luz #fxLuz::after,
+html.fx-calor #fxCalor *,html.fx-calor #fxCalor::before,html.fx-calor #fxCalor *::before,html.fx-calor #fxCalor *::after,
+html.fx-frio #fxFrio *,html.fx-frio #fxFrio::after,
+html.fx-seguridad #fxSeguridad *,html.fx-seguridad #fxSeguridad::before,html.fx-seguridad #fxSeguridad::after,
+html.fx-musica #fxMusica::before{animation-play-state:running}
+html.lx-fx-pausa .lx-fx *,html.lx-fx-pausa .lx-fx::before,html.lx-fx-pausa .lx-fx::after{animation-play-state:paused!important}
+html.lx-arrastrando #fxLuz,html.lx-arrastrando #fxBrillo{transition-duration:.12s}
+
+/* Luz: linterna con el cursor cuando está apagada */
+html.lx-linterna #fxLuz{-webkit-mask-image:radial-gradient(circle 200px at var(--mx,50%) var(--my,45%),transparent 0,rgba(0,0,0,.35) 45%,#000 100%);mask-image:radial-gradient(circle 200px at var(--mx,50%) var(--my,45%),transparent 0,rgba(0,0,0,.35) 45%,#000 100%)}
+/* Luz por encima del 80 %: baño de luz cálida */
+#fxBrillo{mix-blend-mode:screen;background:radial-gradient(ellipse 90% 70% at 50% -5%,rgba(255,238,205,.30),transparent 70%),radial-gradient(ellipse 70% 50% at 50% 105%,rgba(255,220,170,.10),transparent 70%)}
+
+/* Calefacción: brasas como partículas independientes */
+.lx-brasas.lx-brasas-js{background:none;animation:none;overflow:hidden}
+.lx-brasas.lx-brasas-js::before,.lx-brasas.lx-brasas-js::after{display:none}
+.lx-brasa{position:absolute;bottom:-12px;border-radius:50%;background:var(--c);box-shadow:0 0 6px 1px var(--c),0 0 16px 4px rgba(255,110,30,.35);opacity:0;animation-name:lxBrasa;animation-timing-function:linear;animation-iteration-count:infinite;will-change:transform,opacity}
+@keyframes lxBrasa{0%{opacity:0;transform:translate3d(0,0,0) scale(1)}10%{opacity:1}45%{transform:translate3d(calc(var(--dx)*.4),calc(var(--h)*-.45),0) scale(.85)}70%{opacity:.8}100%{opacity:0;transform:translate3d(var(--dx),calc(var(--h)*-1),0) scale(.25)}}
+
+/* Frío: nieve con profundidad */
+.lx-copo.lx-copo2{animation-name:lxCopo;animation-timing-function:linear;animation-iteration-count:infinite;will-change:transform}
+@keyframes lxCopo{0%{transform:translate3d(0,-6vh,0) rotate(0)}50%{transform:translate3d(var(--dx),52vh,0) rotate(calc(var(--r)*.5))}100%{transform:translate3d(0,112vh,0) rotate(var(--r))}}
+
+/* Persianas: luz que se cuela entre lamas */
+#fxPersianas .lx-lamas{transition:height 1.4s cubic-bezier(.65,0,.25,1)}
+#fxPersianas .lx-lamas::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0,transparent 27px,rgba(255,214,150,.10) 27px,rgba(255,214,150,.04) 30px,transparent 30px,transparent 32px)}
+
+/* Seguridad: indicador REC */
+.lx-rec{position:absolute;left:34px;bottom:30px;display:flex;align-items:center;gap:8px;color:#ff6b6b;font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:1px;text-shadow:0 0 8px rgba(255,60,60,.6)}
+.lx-rec i{width:9px;height:9px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 10px #ff3b3b;animation:lxRec 1s steps(1,end) infinite}
+@keyframes lxRec{50%{opacity:0}}
+
+/* Música: visualizador */
+#fxMusica canvas{position:absolute;left:0;bottom:0;width:100%;filter:drop-shadow(0 0 10px rgba(0,245,160,.35))}
+#fxMusica::before{content:"";position:absolute;left:0;right:0;bottom:0;height:45vh;background:radial-gradient(ellipse at 50% 100%,rgba(0,245,160,.14),transparent 70%);animation:lxFuego 3.13s ease-in-out infinite}
+html.fx-musica #fxMusica{opacity:1}
+
+/* Tiles: sin animaciones al cargar, pop + onda al pulsar */
+.lx-panel .lx-tile[aria-pressed=true]::after,.lx-panel .lx-tile[aria-pressed=true] .lx-tile-icon{animation:none}
+.lx-panel .lx-tile.lx-pop[aria-pressed=true]::after{animation:lxTilePing .55s ease-out}
+.lx-panel .lx-tile.lx-pop[aria-pressed=true] .lx-tile-icon{animation:lxIconPop .5s cubic-bezier(.34,1.56,.64,1)}
+.lx-panel .lx-tile[aria-pressed=true] .lx-tile-icon svg{filter:drop-shadow(0 0 4px var(--tc))}
+.lx-panel .lx-tile .lx-tile-icon,.lx-panel .lx-tile .lx-tile-icon svg{transition:box-shadow .3s,filter .3s}
+.lx-ripple{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,color-mix(in srgb,var(--rc,#00d4ff) 40%,transparent) 0,transparent 60%);transform:scale(0);animation:lxRipple .7s ease-out forwards}
+@keyframes lxRipple{to{transform:scale(1);opacity:0}}
+.lx-panel .lx-tile:focus-visible{outline:2px solid #00d4ff;outline-offset:2px}
+
+/* Slider: pista rellena y thumb también en Firefox */
+.lx-panel #lxLuzSlider[type=range]{background:linear-gradient(90deg,#00d4ff,#7b61ff) 0/var(--p,77.8%) 100% no-repeat,rgba(255,255,255,.1)}
+.lx-panel #lxLuzSlider::-webkit-slider-thumb{transition:transform .15s,box-shadow .15s}
+.lx-panel #lxLuzSlider:active::-webkit-slider-thumb{transform:scale(1.18);box-shadow:0 0 0 6px rgba(0,212,255,.18),0 2px 8px #00000080}
+.lx-panel #lxLuzSlider::-moz-range-thumb{background:#fff;border:3px solid #00d4ff;border-radius:50%;width:12px;height:12px;box-shadow:0 2px 8px #00000080}
+.lx-panel #lxLuzSlider:focus-visible{outline:2px solid #00d4ff;outline-offset:6px}
+
+/* Ecualizador arriba a la derecha: no pisa el texto de estado en tiles estrechos */
+.lx-panel .lx-tile .lx-eq{top:16px;bottom:auto;right:14px}
+@media (max-width:640px){.lx-rec{left:20px;bottom:86px}.lx-seg-chip{top:66px!important;font-size:11px!important;padding:6px 12px!important;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}}
+@media (prefers-reduced-motion:reduce){.lx-panel .lx-tile.lx-pop[aria-pressed=true]::after,.lx-panel .lx-tile.lx-pop[aria-pressed=true] .lx-tile-icon,.lx-rec i,#fxMusica::before{animation:none!important}#fxPersianas .lx-lamas,.lx-fx{transition-duration:.01s}}
