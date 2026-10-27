@@ -379,6 +379,72 @@
   pintaHora();
   setTimeout(() => { pintaHora(); setInterval(pintaHora, 60000); }, (60 - new Date().getSeconds()) * 1000);
 
+  // ---------- pantalla de bloqueo: desbloqueo con reconocimiento facial ----------
+  (() => {
+    const pantalla = panel.querySelector(':scope > div');
+    if (!pantalla || reduce) return;
+    const T = {
+      es: ['Verificando identidad…', 'Identidad verificada', 'Toca para desbloquear'],
+      ca: ['Verificant identitat…', 'Identitat verificada', 'Toca per desbloquejar'],
+      en: ['Verifying identity…', 'Identity verified', 'Tap to unlock'],
+    }[lang] || ['Verificando identidad…', 'Identidad verificada', 'Toca para desbloquear'];
+    const ahora = new Date();
+    const lock = document.createElement('div');
+    lock.className = 'lx-lock';
+    lock.setAttribute('aria-hidden', 'true');
+    lock.innerHTML = `
+      <div class="lx-lock-candado"><svg viewBox="0 0 24 24"><path class="lx-lock-arco" d="M7.5 11V7.5a4.5 4.5 0 0 1 9 0V11"/><rect x="5" y="11" width="14" height="10" rx="2.5"/></svg></div>
+      <div class="lx-lock-hora">${ahora.toLocaleTimeString(lang, { hour: '2-digit', minute: '2-digit', hour12: false })}</div>
+      <div class="lx-lock-fecha">${ahora.toLocaleDateString(lang, { weekday: 'long', day: 'numeric', month: 'long' })}</div>
+      <div class="lx-lock-face">
+        <svg viewBox="0 0 64 64">
+          <path class="lx-face-marco" d="M4 18V10a6 6 0 0 1 6-6h8M46 4h8a6 6 0 0 1 6 6v8M60 46v8a6 6 0 0 1-6 6h-8M18 60h-8a6 6 0 0 1-6-6v-8"/>
+          <g class="lx-face-cara"><path d="M23 24v5M41 24v5M32 26v10h-3M24 44c4.5 4 11.5 4 16 0"/></g>
+          <path class="lx-face-check" d="M20 33l8 8 16-17"/>
+        </svg>
+        <span class="lx-face-scan"></span>
+      </div>
+      <div class="lx-lock-texto">${T[2]}</div>
+      <div class="lx-lock-barra"></div>`;
+    pantalla.appendChild(lock);
+    panel.classList.add('lx-bloqueado');
+    const txt = lock.querySelector('.lx-lock-texto');
+    [...pantalla.children].filter((c) => c !== lock && !c.classList.contains('grid')).forEach((c, j) => c.style.setProperty('--i', j ? 7 + j : 0));
+    pantalla.querySelectorAll('.lx-tile').forEach((t, i) => t.style.setProperty('--i', i + 1));
+
+    let fase = 0, timers = [];
+    const en = (ms, fn) => timers.push(setTimeout(fn, ms));
+    function desbloquear(rapido) {
+      if (fase) return;
+      fase = 1;
+      const k = rapido ? 0.45 : 1;
+      lock.classList.add('lx-lock-despierta');
+      en(350 * k, () => { lock.classList.add('lx-lock-escaneando'); txt.textContent = T[0]; });
+      en(1900 * k, () => { lock.classList.add('lx-lock-ok'); txt.textContent = T[1]; });
+      en(2650 * k, () => {
+        lock.classList.add('lx-lock-fuera');
+        panel.classList.remove('lx-bloqueado');
+        panel.classList.add('lx-entrando');
+      });
+      en(3600 * k, () => { lock.remove(); });
+      en(4300 * k, () => panel.classList.remove('lx-entrando'));
+    }
+    lock.addEventListener('click', () => {
+      if (!fase) return desbloquear(true);
+      // ya en marcha: salta directamente al final
+      timers.forEach(clearTimeout);
+      lock.classList.add('lx-lock-ok', 'lx-lock-fuera');
+      panel.classList.remove('lx-bloqueado');
+      panel.classList.add('lx-entrando');
+      setTimeout(() => lock.remove(), 900);
+      setTimeout(() => panel.classList.remove('lx-entrando'), 1500);
+    });
+    const io = new IntersectionObserver(([e]) => {
+      if (e.intersectionRatio >= 0.45) { io.disconnect(); setTimeout(() => desbloquear(false), 450); }
+    }, { threshold: [0, 0.45, 1] });
+    io.observe(panel);
+  })();
+
   render();
   panel.classList.add('lx-listo');
 })();
