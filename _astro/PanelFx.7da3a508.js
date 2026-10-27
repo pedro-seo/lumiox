@@ -425,6 +425,7 @@
         lock.classList.add('lx-lock-fuera');
         panel.classList.remove('lx-bloqueado');
         panel.classList.add('lx-entrando');
+        document.dispatchEvent(new Event('lx:desbloqueado'));
       });
       en(3600 * k, () => { lock.remove(); });
       en(4300 * k, () => panel.classList.remove('lx-entrando'));
@@ -436,6 +437,7 @@
       lock.classList.add('lx-lock-ok', 'lx-lock-fuera');
       panel.classList.remove('lx-bloqueado');
       panel.classList.add('lx-entrando');
+      document.dispatchEvent(new Event('lx:desbloqueado'));
       setTimeout(() => lock.remove(), 900);
       setTimeout(() => panel.classList.remove('lx-entrando'), 1500);
     });
