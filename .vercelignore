@@ -1,0 +1,4 @@
+# Config del hosting anterior (Apache/Raiola y Netlify/Cloudflare): en Vercel no aplica
+# y no debe publicarse como fichero. Su equivalente está en vercel.json.
+.htaccess
+_redirects
