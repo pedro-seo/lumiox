@@ -136,7 +136,7 @@ html.fx-musica .lx-panel.lx-ipad::after{top:-30px}
 .lx-lock-escaneando .lx-face-marco{animation:lxFaceMarco 1.1s ease-in-out infinite;stroke:#7DD3FC}
 @keyframes lxFaceMarco{50%{transform:scale(.9)}}
 .lx-face-scan{position:absolute;left:8px;right:8px;top:8px;height:2px;border-radius:2px;opacity:0;background:linear-gradient(90deg,transparent,#00D4FF,transparent);box-shadow:0 0 12px 2px rgba(0,212,255,.7)}
-.lx-lock-escaneando .lx-face-scan{opacity:1;animation:lxFaceScan 1.1s ease-in-out infinite alternate}
+.lx-lock-escaneando .lx-face-scan{opacity:1;top:calc(8px + var(--lp,0) * 66px)}
 @keyframes lxFaceScan{to{top:74px}}
 .lx-lock-ok .lx-face-marco{animation:lxFaceOk .5s cubic-bezier(.34,1.56,.64,1);stroke:#00F5A0}
 @keyframes lxFaceOk{0%{transform:scale(.88)}100%{transform:scale(1)}}
@@ -146,10 +146,24 @@ html.fx-musica .lx-panel.lx-ipad::after{top:-30px}
 .lx-lock-ok .lx-lock-face{filter:drop-shadow(0 0 14px rgba(0,245,160,.55))}
 .lx-lock-texto{margin-top:14px;min-height:18px;font-size:13px;font-weight:500;color:rgba(255,255,255,.8);transition:color .3s}
 .lx-lock-ok .lx-lock-texto{color:#00F5A0}
-.lx-lock-barra{margin-top:18px;width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.7)}
+.lx-lock-barra{margin-top:14px;width:120px;height:5px;border-radius:3px;background:linear-gradient(90deg,#00F5A0 var(--lpp,0%),rgba(255,255,255,.7) var(--lpp,0%))}
+.lx-lock-flecha{width:20px;height:20px;margin-top:6px;fill:none;stroke:rgba(255,255,255,.75);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:lxFlecha 1.4s ease-in-out infinite;transition:opacity .3s}
+@keyframes lxFlecha{0%,100%{transform:translateY(-2px);opacity:.5}50%{transform:translateY(4px);opacity:1}}
+.lx-lock-escaneando .lx-lock-flecha,.lx-lock-ok .lx-lock-flecha{animation:none;opacity:0}
 /* Contenido oculto mientras está bloqueado; entrada escalonada al desbloquear */
 .lx-bloqueado .lx-ipad>div>*:not(.lx-lock),.lx-panel.lx-bloqueado>div>*:not(.lx-lock){opacity:0}
 .lx-panel.lx-entrando>div>*:not(.lx-lock),.lx-panel.lx-entrando .lx-tile{animation:lxEntra .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 120ms)}
 .lx-panel.lx-entrando>div>.grid{animation:none}
 @keyframes lxEntra{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
 @media (max-width:640px){.lx-lock{padding:26px 14px 20px}}
+
+/* Ancho estable del iPad: el texto de los botones (p. ej. "Encendida · 100%") no puede ensancharlo */
+.lx-ipad .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.lx-ipad .lx-tile{min-width:0}
+.lx-ipad .lx-tile-nombre,.lx-ipad .lx-tile-estado{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lx-ipad .lx-tile-estado{font-variant-numeric:tabular-nums}
+/* ≤768 px el hero va en columna centrada: sin esto la columna del iPad toma el ancho de su contenido */
+@media (max-width:768px){.lx-hero-flex>.lx-pared-col{align-self:stretch;width:100%}}
+/* 769–1023 px: iPad debajo del texto en vez de apretado a media columna */
+@media (min-width:769px) and (max-width:1023px){.lx-hero-flex>.lx-pared-col{flex-basis:100%}}
+@media (max-width:380px){.lx-ipad .lx-tile{padding:12px}.lx-ipad .lx-tile-estado{font-size:10px;letter-spacing:-.2px}}

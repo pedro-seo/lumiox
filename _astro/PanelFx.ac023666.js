@@ -384,10 +384,10 @@
     const pantalla = panel.querySelector(':scope > div');
     if (!pantalla || reduce) return;
     const T = {
-      es: ['Verificando identidad…', 'Identidad verificada', 'Toca para desbloquear'],
-      ca: ['Verificant identitat…', 'Identitat verificada', 'Toca per desbloquejar'],
-      en: ['Verifying identity…', 'Identity verified', 'Tap to unlock'],
-    }[lang] || ['Verificando identidad…', 'Identidad verificada', 'Toca para desbloquear'];
+      es: ['Verificando identidad…', 'Identidad verificada', 'Desliza para desbloquear'],
+      ca: ['Verificant identitat…', 'Identitat verificada', 'Llisca per desbloquejar'],
+      en: ['Verifying identity…', 'Identity verified', 'Scroll to unlock'],
+    }[lang] || ['Verificando identidad…', 'Identidad verificada', 'Desliza para desbloquear'];
     const ahora = new Date();
     const lock = document.createElement('div');
     lock.className = 'lx-lock';
@@ -405,46 +405,87 @@
         <span class="lx-face-scan"></span>
       </div>
       <div class="lx-lock-texto">${T[2]}</div>
+      <svg class="lx-lock-flecha" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
       <div class="lx-lock-barra"></div>`;
     pantalla.appendChild(lock);
     panel.classList.add('lx-bloqueado');
     const txt = lock.querySelector('.lx-lock-texto');
     [...pantalla.children].filter((c) => c !== lock && !c.classList.contains('grid')).forEach((c, j) => c.style.setProperty('--i', j ? 7 + j : 0));
     pantalla.querySelectorAll('.lx-tile').forEach((t, i) => t.style.setProperty('--i', i + 1));
+    requestAnimationFrame(() => lock.classList.add('lx-lock-despierta'));
 
-    let fase = 0, timers = [];
-    const en = (ms, fn) => timers.push(setTimeout(fn, ms));
-    function desbloquear(rapido) {
-      if (fase) return;
-      fase = 1;
-      const k = rapido ? 0.45 : 1;
-      lock.classList.add('lx-lock-despierta');
-      en(350 * k, () => { lock.classList.add('lx-lock-escaneando'); txt.textContent = T[0]; });
-      en(1900 * k, () => { lock.classList.add('lx-lock-ok'); txt.textContent = T[1]; });
-      en(2650 * k, () => {
+    // El progreso del escaneo (0→1) sigue al scroll. Si el iPad ya se ve al cargar (escritorio),
+    // cuentan los primeros píxeles de scroll; si está más abajo (móvil), su entrada en pantalla.
+    const vh = () => innerHeight;
+    const r0 = panel.getBoundingClientRect();
+    const visibleAlCargar = r0.top < vh() * 0.6;
+    const top0 = r0.top + scrollY;
+    const RECORRIDO = 240;
+    function progresoScroll() {
+      const top = top0 - scrollY;
+      if (visibleAlCargar) return (r0.top - top) / RECORRIDO;
+      return (vh() * 0.95 - top) / (vh() * 0.6);
+    }
+
+    let p = 0, hecho = false, auto = 0, animRaf = 0, raf = 0;
+    function pintar(v) {
+      p = Math.max(0, Math.min(1, v));
+      lock.style.setProperty('--lp', p.toFixed(3));
+      lock.style.setProperty('--lpp', `${(p * 100).toFixed(1)}%`);
+      const escaneando = p > 0.02;
+      if (escaneando !== lock.classList.contains('lx-lock-escaneando')) {
+        lock.classList.toggle('lx-lock-escaneando', escaneando);
+        txt.textContent = escaneando ? T[0] : T[2];
+      }
+      if (p >= 1) completar();
+    }
+    function completar() {
+      if (hecho) return;
+      hecho = true;
+      cancelAnimationFrame(animRaf);
+      clearTimeout(auto);
+      removeEventListener('scroll', onScroll);
+      lock.classList.add('lx-lock-ok');
+      txt.textContent = T[1];
+      setTimeout(() => {
         lock.classList.add('lx-lock-fuera');
         panel.classList.remove('lx-bloqueado');
         panel.classList.add('lx-entrando');
         document.dispatchEvent(new Event('lx:desbloqueado'));
-      });
-      en(3600 * k, () => { lock.remove(); });
-      en(4300 * k, () => panel.classList.remove('lx-entrando'));
+      }, 650);
+      setTimeout(() => lock.remove(), 1600);
+      setTimeout(() => panel.classList.remove('lx-entrando'), 2300);
     }
-    lock.addEventListener('click', () => {
-      if (!fase) return desbloquear(true);
-      // ya en marcha: salta directamente al final
-      timers.forEach(clearTimeout);
-      lock.classList.add('lx-lock-ok', 'lx-lock-fuera');
-      panel.classList.remove('lx-bloqueado');
-      panel.classList.add('lx-entrando');
-      document.dispatchEvent(new Event('lx:desbloqueado'));
-      setTimeout(() => lock.remove(), 900);
-      setTimeout(() => panel.classList.remove('lx-entrando'), 1500);
-    });
-    const io = new IntersectionObserver(([e]) => {
-      if (e.intersectionRatio >= 0.45) { io.disconnect(); setTimeout(() => desbloquear(false), 450); }
-    }, { threshold: [0, 0.45, 1] });
-    io.observe(panel);
+    // Lleva el escaneo hasta el final sin scroll (tiempo de espera o toque)
+    function animarHastaFinal(ms) {
+      cancelAnimationFrame(animRaf);
+      const desde = p, t0 = performance.now();
+      const paso = (now) => {
+        const k = Math.min(1, (now - t0) / ms);
+        pintar(desde + (1 - desde) * (1 - Math.pow(1 - k, 3)));
+        if (!hecho && k < 1) animRaf = requestAnimationFrame(paso);
+      };
+      animRaf = requestAnimationFrame(paso);
+    }
+    function reprogramarAuto() {
+      clearTimeout(auto);
+      const r = panel.getBoundingClientRect();
+      const visible = r.top < vh() * 0.7 && r.bottom > vh() * 0.3;
+      if (visible) auto = setTimeout(() => animarHastaFinal(1500), 6000);
+    }
+    function onScroll() {
+      if (raf || hecho) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        cancelAnimationFrame(animRaf);
+        pintar(progresoScroll());
+        reprogramarAuto();
+      });
+    }
+    addEventListener('scroll', onScroll, { passive: true });
+    lock.addEventListener('click', () => animarHastaFinal(500));
+    pintar(progresoScroll());
+    reprogramarAuto();
   })();
 
   render();
