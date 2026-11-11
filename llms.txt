@@ -1,0 +1,38 @@
+# Lumiox
+
+> Lumiox es una empresa de domótica con sede en Barcelona que diseña e instala sistemas inteligentes (KNX, Loxone, Control4 y soluciones inalámbricas Zigbee/Z-Wave) en viviendas y negocios de toda Cataluña y Andorra. Presupuesto gratuito y sin compromiso.
+
+- Servicios: iluminación inteligente, climatización automatizada, seguridad, persianas y toldos, audio y multimedia, gestión energética.
+- Sectores: residencial, comercial, hostelería e industrial.
+- Contacto: teléfono y WhatsApp +34 615 50 95 57 · hola@lumiox.es · lunes a viernes de 9:00 a 19:00.
+- Idiomas del sitio: español (/), catalán (/ca/) e inglés (/en/).
+
+## Páginas principales
+
+- [Domótica Barcelona](https://lumiox.es/): Empresa de domótica en Barcelona. Instalamos sistemas inteligentes KNX, Loxone y Control4 para hogares y negocios. Presupuesto gratis. Llámanos.
+- [Proyectos de domótica, antes y después](https://lumiox.es/proyectos/): Proyectos reales de domótica en Barcelona: pisos, chalets, hoteles y oficinas. Mira el antes y el después de nuestras instalaciones KNX, Loxone y Control4.
+- [Las personas detrás de Lumiox](https://lumiox.es/sobre-nosotros/): Conoce a Mario Sánchez, fundador de Lumiox, y a nuestro equipo de instaladores técnicos certificados KNX y Loxone en Barcelona.
+- [Hablemos de tu proyecto domótico](https://lumiox.es/contacto/): Contacta con Lumiox, tu empresa de domótica en Barcelona. Presupuesto gratuito y sin compromiso. Respuesta en menos de 24 horas.
+
+## Domótica por ciudad
+
+- [Domótica Badalona](https://lumiox.es/domotica-badalona/): Empresa de domótica en Badalona. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Instaladores de domótica en Barcelona](https://lumiox.es/domotica-barcelona/): Instaladores de domótica en Barcelona ciudad: Eixample, Gràcia, Gòtic y todos los barrios. Certificados KNX y Loxone. Presupuesto gratis. WhatsApp 615 50 95 57.
+- [Domótica Castelldefels](https://lumiox.es/domotica-castelldefels/): Empresa de domótica en Castelldefels. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Cornellà](https://lumiox.es/domotica-cornella/): Empresa de domótica en Cornellà. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Esplugues](https://lumiox.es/domotica-esplugues/): Empresa de domótica en Esplugues. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Gavà](https://lumiox.es/domotica-gava/): Empresa de domótica en Gavà. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica L’Hospitalet](https://lumiox.es/domotica-hospitalet/): Empresa de domótica en L'Hospitalet. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Mataró](https://lumiox.es/domotica-mataro/): Empresa de domótica en Mataró. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica El Prat de Llobregat](https://lumiox.es/domotica-prat-llobregat/): Empresa de domótica en El Prat de Llobregat. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Sabadell](https://lumiox.es/domotica-sabadell/): Empresa de domótica en Sabadell. Instaladores certificados KNX y Loxone en el Vallès Occidental. Presupuesto gratis. Solicita tu consulta.
+- [Domótica Sant Cugat](https://lumiox.es/domotica-sant-cugat/): Empresa de domótica en Sant Cugat. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Sant Just Desvern](https://lumiox.es/domotica-sant-just/): Empresa de domótica en Sant Just Desvern. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Sitges](https://lumiox.es/domotica-sitges/): Empresa de domótica en Sitges. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Terrassa](https://lumiox.es/domotica-terrassa/): Empresa de domótica en Terrassa. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+- [Domótica Viladecans](https://lumiox.es/domotica-viladecans/): Empresa de domótica en Viladecans. Instaladores certificados KNX y Loxone. Presupuesto gratis. Llámanos o escríbenos por WhatsApp al 615 50 95 57.
+
+## Otros idiomas
+
+- [Català](https://lumiox.es/ca/): versió en català del lloc.
+- [English](https://lumiox.es/en/): English version of the site.
