@@ -150,11 +150,23 @@ html.fx-musica .lx-panel.lx-ipad::after{top:-30px}
 .lx-lock-flecha{width:20px;height:20px;margin-top:6px;fill:none;stroke:rgba(255,255,255,.75);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:lxFlecha 1.4s ease-in-out infinite;transition:opacity .3s}
 @keyframes lxFlecha{0%,100%{transform:translateY(-2px);opacity:.5}50%{transform:translateY(4px);opacity:1}}
 .lx-lock-escaneando .lx-lock-flecha,.lx-lock-ok .lx-lock-flecha{animation:none;opacity:0}
-/* Contenido oculto mientras está bloqueado; entrada escalonada al desbloquear */
-.lx-bloqueado .lx-ipad>div>*:not(.lx-lock),.lx-panel.lx-bloqueado>div>*:not(.lx-lock){opacity:0}
-.lx-panel.lx-entrando>div>*:not(.lx-lock),.lx-panel.lx-entrando .lx-tile{animation:lxEntra .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*70ms + 120ms)}
-.lx-panel.lx-entrando>div>.grid{animation:none}
-@keyframes lxEntra{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+/* ===== Desbloqueo ligado al scroll ===== */
+.lx-pin{position:relative}
+.lx-pin-sec{position:sticky}
+.lx-panel.lx-ipad{transform-origin:50% 65%;will-change:transform;backface-visibility:hidden}
+.lx-pared{will-change:opacity}
+/* La pantalla de bloqueo sube con el scroll (sin transiciones: la mueve el dedo) */
+.lx-lock{transition:opacity .5s ease,filter .7s ease;transform:translate3d(0,calc(var(--lu,0) * -104%),0)}
+.lx-lock>*{opacity:calc(1 - var(--lu,0) * 1.4)}
+.lx-lock-top{display:flex;flex-direction:column;align-items:center;transform:translate3d(0,calc(var(--lu,0) * -40px),0) scale(calc(1 - var(--lu,0) * .18))}
+.lx-lock::after{content:"";position:absolute;left:0;right:0;bottom:-40px;height:40px;background:linear-gradient(180deg,rgba(0,212,255,.25),transparent);opacity:calc(var(--lu,0) * 2)}
+/* Reflejo del cristal que barre con la inclinación */
+.lx-ipad-reflejo{transform:translate3d(calc(var(--lx-tilt,0) * 30px),0,0);opacity:calc(1 + var(--lx-tilt,0) * 1.5)}
+/* Contenido: aparece pieza a pieza según avanza el scroll */
+.lx-panel.lx-scrub .lx-rv{opacity:var(--rv,0);transform:translate3d(0,calc((1 - var(--rv,0)) * 18px),0) scale(calc(.94 + var(--rv,0) * .06));transition:none}
+/* Destello al terminar */
+.lx-panel.lx-abierto{animation:lxAbierto .9s ease-out}
+@keyframes lxAbierto{0%,100%{box-shadow:var(--ipad-sombra),0 0 0 0 rgba(0,212,255,0)}30%{box-shadow:var(--ipad-sombra),0 0 90px 12px rgba(0,212,255,.35)}}
 @media (max-width:640px){.lx-lock{padding:26px 14px 20px}}
 
 /* Ancho estable del iPad: el texto de los botones (p. ej. "Encendida · 100%") no puede ensancharlo */
@@ -167,3 +179,28 @@ html.fx-musica .lx-panel.lx-ipad::after{top:-30px}
 /* 769–1023 px: iPad debajo del texto en vez de apretado a media columna */
 @media (min-width:769px) and (max-width:1023px){.lx-hero-flex>.lx-pared-col{flex-basis:100%}}
 @media (max-width:380px){.lx-ipad .lx-tile{padding:12px}.lx-ipad .lx-tile-estado{font-size:10px;letter-spacing:-.2px}}
+
+/* ===== Marco real del iPad (imagen 9-slice: se adapta a la altura del contenido) ===== */
+.lx-pared-col{container-type:inline-size}
+.lx-panel.lx-ipad{--w:440px;--ipad-sombra:0 42px 70px -22px rgba(0,0,0,.8),0 16px 28px -8px rgba(0,0,0,.55);
+  padding:calc(var(--w)*.0576) calc(var(--w)*.0548) calc(var(--w)*.0569) calc(var(--w)*.0555);
+  border:0;border-radius:calc(var(--w)*.07);background:none;box-shadow:var(--ipad-sombra)}
+@supports (width:1cqw){.lx-panel.lx-ipad{--w:min(440px,100cqw)}}
+html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
+.lx-ipad>div{border-radius:calc(var(--w)*.036)!important}
+.lx-ipad-marco{position:absolute;inset:0;z-index:30;pointer-events:none;box-sizing:border-box;border-style:solid;border-color:transparent;
+  border-width:calc(var(--w)*.2528) calc(var(--w)*.1615) calc(var(--w)*.0913) calc(var(--w)*.0913);
+  border-image:url(/_astro/ipad-marco.webp) 270 172 98 98 fill stretch}
+.lx-ipad-cam,.lx-ipad-boton,.lx-ipad-vol{display:none}
+.lx-ipad-reflejo{inset:calc(var(--w)*.0576) calc(var(--w)*.0548) calc(var(--w)*.0569) calc(var(--w)*.0555);border-radius:calc(var(--w)*.036)}
+@media (max-width:640px){.lx-ipad>div{padding:16px!important}}
+/* Móvil: tiles compactos (icono a la izquierda) para que la pantalla mantenga proporción de iPad */
+@media (max-width:640px){
+  .lx-ipad .grid{gap:8px}
+  .lx-ipad .lx-tile{display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:10px;row-gap:0;align-items:center;padding:10px}
+  .lx-ipad .lx-tile .lx-tile-icon{grid-row:1/3;width:30px;height:30px;margin:0}
+  .lx-ipad .lx-tile .lx-tile-icon svg{width:17px;height:17px}
+  .lx-ipad .lx-tile .lx-eq{top:10px;right:10px}
+  .lx-ipad .lx-tile-nombre{font-size:12px}
+  .lx-ipad .lx-tile-estado{font-size:10px;letter-spacing:-.2px}
+}
