@@ -204,3 +204,5 @@ html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
   .lx-ipad .lx-tile-nombre{font-size:12px}
   .lx-ipad .lx-tile-estado{font-size:10px;letter-spacing:-.2px}
 }
+/* Persianas detrás del contenido: oscurecen el fondo de la web, nunca el texto */
+#fxPersianas{z-index:-1}
