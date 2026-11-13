@@ -1,0 +1,88 @@
+/* Animación de la familia (sección "La solución") */
+.lx-fam{width:100%;max-width:900px;margin:0 auto 56px}
+.lx-fam-escena{position:relative;border-radius:28px;overflow:hidden;border:1px solid rgba(0,212,255,.15);box-shadow:0 30px 80px -20px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.03)}
+.lx-fam svg{display:block;width:100%;height:auto}
+.lx-fam-pie{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
+.lx-fam-chip{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);font-size:13px;color:#9ca3af;transition:all .4s}
+.lx-fam-chip i{width:8px;height:8px;border-radius:50%;background:#334155;transition:all .4s}
+.lx-fam-chip.on{color:#fff;border-color:rgba(0,212,255,.45);background:linear-gradient(135deg,rgba(0,212,255,.16),rgba(123,97,255,.14))}
+.lx-fam-chip.on i{background:#00D4FF;box-shadow:0 0 10px #00D4FF}
+@media (max-width:640px){.lx-fam{margin-bottom:40px}.lx-fam-escena{border-radius:18px}.lx-fam-chip{font-size:12px;padding:6px 11px}}
+/* ---------- Personajes: respiración y movimientos ---------- */
+.lx-fam .resp{animation:resp 3.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.lx-fam .resp2{animation-delay:-1.2s}.lx-fam .resp3{animation-delay:-2.1s}
+@keyframes resp{50%{transform:scaleY(1.025)}}
+.lx-fam .parpadeo{animation:parpadeo 5s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes parpadeo{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.1)}}
+
+/* Padre: el brazo sube y toca la tablet */
+.lx-fam #brazoPadre{transform-box:view-box;transform-origin:268px 262px;transform:rotate(0deg);transition:transform .55s cubic-bezier(.34,1.4,.64,1)}
+.lx-fam.toca #brazoPadre{transform:rotate(-118deg)}
+.lx-fam #cabezaPadre{transform-box:fill-box;transform-origin:center bottom;transition:transform .5s ease}
+.lx-fam.toca #cabezaPadre{transform:rotate(-8deg)}
+
+/* Niña: salta de alegría con cada acción */
+.lx-fam #nina{transform-box:fill-box;transform-origin:50% 100%}
+.lx-fam.salta #nina{animation:salto .9s cubic-bezier(.3,.7,.4,1) 2}
+@keyframes salto{0%,100%{transform:translateY(0) scale(1,1)}15%{transform:translateY(0) scale(1.08,.9)}50%{transform:translateY(-34px) scale(.95,1.06)}85%{transform:translateY(0) scale(1.06,.94)}}
+.lx-fam #brazosNina{transform-box:fill-box;transform-origin:50% 100%;transition:transform .3s}
+.lx-fam.salta #brazosNina{transform:scaleY(-1)}
+/* Música: baile */
+.lx-fam.m-musica #nina{animation:baile .8s ease-in-out infinite}
+@keyframes baile{0%,100%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(7deg) translateY(-8px)}}
+.lx-fam.m-musica #madre{animation:balanceo 1.6s ease-in-out infinite}
+@keyframes balanceo{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.lx-fam #madre{transform-box:fill-box;transform-origin:50% 100%}
+
+/* ---------- Tablet ---------- */
+.lx-fam .tab-ico{transition:opacity .4s,fill .4s}
+.lx-fam .tab-tile{fill:rgba(255,255,255,.06);transition:fill .4s,stroke .4s;stroke:rgba(255,255,255,.08)}
+.lx-fam .tab-tile.on{fill:url(#gTile);stroke:#00D4FF}
+.lx-fam #tabBrillo{opacity:.35;transition:opacity .6s}
+.lx-fam.toca #tabBrillo{opacity:.9}
+.lx-fam .onda{fill:none;stroke:#7DD3FC;stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
+.lx-fam.toca .onda{animation:onda .9s ease-out .35s}
+.lx-fam.toca .onda2{animation-delay:.55s}
+@keyframes onda{0%{opacity:.9;transform:scale(.2)}100%{opacity:0;transform:scale(2.4)}}
+/* Señal de la tablet hacia el aparato */
+.lx-fam .senal{fill:none;stroke:url(#gSenal);stroke-width:3;stroke-linecap:round;stroke-dasharray:6 14;opacity:0}
+.lx-fam.toca .senal.act{animation:senal 1.1s linear .45s}
+@keyframes senal{0%{opacity:0;stroke-dashoffset:60}20%,80%{opacity:1}100%{opacity:0;stroke-dashoffset:0}}
+
+/* ---------- Luz ---------- */
+.lx-fam #oscuro{opacity:.55;transition:opacity 1.2s ease}
+.lx-fam.m-luz #oscuro{opacity:0}
+.lx-fam #luzCono,.lx-fam #luzHalo{opacity:0;transition:opacity 1s ease}
+.lx-fam.m-luz #luzCono{opacity:.8}.lx-fam.m-luz #luzHalo{opacity:1}
+.lx-fam #bombilla{fill:#334155;transition:fill .6s}
+.lx-fam.m-luz #bombilla{fill:#E0F2FE}
+
+/* ---------- Persianas ---------- */
+.lx-fam #lamas{transform-box:view-box;transform-origin:0 70px;transform:scaleY(.06);transition:transform 1.6s cubic-bezier(.65,0,.3,1)}
+.lx-fam.m-persianas #lamas{transform:scaleY(1)}
+.lx-fam #luna{transition:opacity 1.2s}
+.lx-fam.m-persianas #luna{opacity:.15}
+
+/* ---------- Clima ---------- */
+.lx-fam .ola{fill:none;stroke:url(#gOla);stroke-width:3;stroke-linecap:round;opacity:0}
+.lx-fam.m-clima .ola{animation:ola 2.6s ease-in-out infinite}
+.lx-fam.m-clima .ola2{animation-delay:-.9s}.lx-fam.m-clima .ola3{animation-delay:-1.7s}
+@keyframes ola{0%{opacity:0;transform:translateY(16px)}30%,70%{opacity:.85}100%{opacity:0;transform:translateY(-26px)}}
+.lx-fam #termo{transition:opacity .5s}
+.lx-fam #termoTxt{font:700 15px Inter,system-ui,sans-serif;fill:#fff}
+
+/* ---------- Música ---------- */
+.lx-fam .nota{opacity:0;font:700 22px system-ui;fill:url(#gNota)}
+.lx-fam.m-musica .nota{animation:nota 2.8s ease-out infinite}
+.lx-fam.m-musica .n2{animation-delay:-.9s}.lx-fam.m-musica .n3{animation-delay:-1.8s}.lx-fam.m-musica .n4{animation-delay:-2.3s}
+@keyframes nota{0%{opacity:0;transform:translate(0,0) rotate(0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx,20px),-90px) rotate(20deg)}}
+.lx-fam #altavozCono{transform-box:fill-box;transform-origin:center}
+.lx-fam.m-musica #altavozCono{animation:latido .45s ease-in-out infinite}
+@keyframes latido{50%{transform:scale(1.15)}}
+
+/* Brillos ambientales */
+.lx-fam .estrella{animation:titila 3s ease-in-out infinite}
+.lx-fam .estrella:nth-child(2n){animation-delay:-1.4s}
+@keyframes titila{50%{opacity:.25}}
+
+@media (prefers-reduced-motion:reduce){.lx-fam *{animation:none!important;transition:none!important}}
