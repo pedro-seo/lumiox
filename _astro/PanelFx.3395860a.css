@@ -190,7 +190,7 @@ html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
 .lx-ipad>div{border-radius:calc(var(--w)*.036)!important}
 .lx-ipad-marco{position:absolute;inset:0;z-index:30;pointer-events:none;box-sizing:border-box;border-style:solid;border-color:transparent;
   border-width:calc(var(--w)*.2528) calc(var(--w)*.1615) calc(var(--w)*.0913) calc(var(--w)*.0913);
-  border-image:url(/_astro/ipad-marco.webp) 270 172 98 98 fill stretch}
+  border-image:url(/_astro/ipad-marco.f777c5d8.webp) 270 172 98 98 fill stretch}
 .lx-ipad-cam,.lx-ipad-boton,.lx-ipad-vol{display:none}
 .lx-ipad-reflejo{inset:calc(var(--w)*.0576) calc(var(--w)*.0548) calc(var(--w)*.0569) calc(var(--w)*.0555);border-radius:calc(var(--w)*.036)}
 @media (max-width:640px){.lx-ipad>div{padding:16px!important}}
@@ -206,3 +206,32 @@ html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
 }
 /* Persianas detrás del contenido: oscurecen el fondo de la web, nunca el texto */
 #fxPersianas{z-index:-1}
+
+/* ===== Escritorio/tablet (≥769 px): iPad en horizontal con su marco real ===== */
+@media (min-width:769px){
+  .lx-pared-col{padding-left:12px;padding-right:12px}
+  .lx-panel.lx-ipad{max-width:none;--w:600px;width:var(--w);aspect-ratio:2000/1424;
+    padding:calc(var(--w)*.0395) calc(var(--w)*.0415) calc(var(--w)*.04) calc(var(--w)*.041);
+    border-radius:calc(var(--w)*.07);display:flex;flex-direction:column}
+  @supports (width:1cqw){.lx-panel.lx-ipad{--w:min(600px,100cqw)}}
+  html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
+  .lx-ipad>div{flex:1;border-radius:calc(var(--w)*.026)!important;padding:18px 20px 14px!important}
+  .lx-ipad-marco{border-width:calc(var(--w)*.12) calc(var(--w)*.09) calc(var(--w)*.09) calc(var(--w)*.09);
+    border-image:url(/_astro/ipad-marco-h.a4151fc5.webp) 168 126 126 126 fill stretch}
+  .lx-ipad-reflejo{inset:calc(var(--w)*.0395) calc(var(--w)*.0415) calc(var(--w)*.04) calc(var(--w)*.041);border-radius:calc(var(--w)*.026)}
+  .lx-ipad .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .lx-ipad .lx-tile{display:grid;grid-template-columns:26px minmax(0,1fr);column-gap:8px;row-gap:0;align-items:center;padding:9px 8px}
+  .lx-ipad .lx-tile .lx-tile-icon{grid-row:1/3;width:26px;height:26px;margin:0}
+  .lx-ipad .lx-tile .lx-tile-icon svg{width:15px;height:15px}
+  .lx-ipad .lx-tile .lx-eq{top:9px;right:8px}
+  .lx-ipad .lx-tile-nombre{font-size:12px}
+  .lx-ipad .lx-tile-estado{font-size:10px;letter-spacing:-.4px}
+  .lx-ipad>div>div:first-of-type{margin-bottom:12px}
+  .lx-ipad>div>.mt-4{margin-top:10px}
+  .lx-ipad>div>.rounded-2xl{padding-top:8px;padding-bottom:8px}
+  .lx-ipad>div>p.mt-4{margin-top:8px}
+  .lx-interruptor{display:none}
+  .lx-lock{padding:22px 20px 16px}
+  .lx-lock-hora{font-size:64px}
+  .lx-lock-face{width:66px;height:66px}
+}
