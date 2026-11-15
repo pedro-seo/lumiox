@@ -252,7 +252,8 @@ body:has(.lx-sala-card) > .lx-fx{display:none!important}
 .lx-sala-col{--bl:40px;--br:40px}
 .lx-sala-card{position:relative;z-index:0;width:calc(100% + var(--bl) + var(--br));margin-left:calc(var(--bl) * -1);aspect-ratio:800/520;border-radius:26px;overflow:hidden;
   box-shadow:0 34px 80px -24px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.06)}
-.lx-sala-card svg{display:block;width:100%;height:100%;transform:scale(1.1);transform-origin:50% 40%;will-change:transform}
+.lx-sala-zoom{position:absolute;inset:0;transform:scale(1.1);transform-origin:50% 40%;will-change:transform}
+.lx-sala-zoom>img,.lx-sala-zoom>svg{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
 .lx-sala-card::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);pointer-events:none}
 /* El iPad se coloca delante, abajo a la izquierda, dejando el salón a la vista */
 .lx-sala-col .lx-panel.lx-ipad{--w:78cqw;width:var(--w);max-width:none;margin:calc((100cqw + var(--bl) + var(--br)) * -.24) 0 0 calc(var(--bl) * -1)}
@@ -300,3 +301,16 @@ html.fx-musica .lx-sala-card .s-nota{animation:sNota 2.6s ease-out infinite;tran
 @keyframes sNota{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx,16px),-70px) rotate(18deg)}}
 /* Móviles estrechos: un poco más de sitio para los nombres de los controles */
 @media (max-width:420px){.lx-ipad>div{padding:14px!important}.lx-ipad .grid{gap:7px}.lx-ipad .lx-tile{padding:9px 7px;column-gap:7px;grid-template-columns:26px minmax(0,1fr)}.lx-ipad .lx-tile .lx-tile-icon{width:26px;height:26px}.lx-ipad .lx-tile-nombre{font-size:11.5px;letter-spacing:-.1px}}
+
+/* Foto real: noche, focos, chimenea */
+.lx-sala-card .s-noche{opacity:max(0,calc((.9 - var(--lx-pared,.84)) * .9));transition:opacity .5s ease}
+html.lx-oscuro .lx-sala-card .s-noche{opacity:.74}
+.lx-sala-card .s-noche-ventana{opacity:0;transition:opacity .6s}
+html.lx-oscuro .lx-sala-card .s-noche-ventana{opacity:.4}
+.lx-sala-card .s-focos-off{opacity:0;transition:opacity .4s}
+html.lx-oscuro .lx-sala-card .s-focos-off{opacity:.9}
+.lx-sala-card .s-chim-off{opacity:.93;transition:opacity .8s}
+html.fx-calor .lx-sala-card .s-chim-off{opacity:0}
+.lx-sala-card .s-fuego{transform-box:fill-box;transform-origin:center}
+html.fx-calor .lx-sala-card .s-fuego{animation:sFuego 1.7s ease-in-out infinite}
+@keyframes sFuego{0%,100%{opacity:.85;transform:scale(1)}40%{opacity:1;transform:scale(1.06,1.1)}70%{opacity:.75;transform:scale(.97,1.02)}}

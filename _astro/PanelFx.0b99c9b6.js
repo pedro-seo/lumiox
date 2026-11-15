@@ -16,7 +16,7 @@ let pin=null,recorrido=0;
 function medir(){if(!pin)return;recorrido=Math.round(vh()*.9);const h=sec.offsetHeight;pin.style.height=h+recorrido+"px";sec.style.top=Math.min(0,vh()-h)+"px"}
 if(fijar){pin=document.createElement("div");pin.className="lx-pin";sec.before(pin);pin.appendChild(sec);sec.classList.add("lx-pin-sec");medir()}
 const izq=pin&&[...sec.querySelectorAll(".lx-hero-flex > *")].find(e=>!e.contains(t));
-const casa=sec&&sec.querySelector(".lx-sala-card svg");
+const casa=sec&&sec.querySelector(".lx-sala-card .lx-sala-zoom");
 function objetivo(){
  if(pin){const y=scrollY-pin.offsetTop;return cl(y/recorrido)}
  const r=col.getBoundingClientRect();return cl((vh()*1.02-r.top)/(vh()*.72))
