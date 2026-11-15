@@ -314,3 +314,6 @@ html.fx-calor .lx-sala-card .s-chim-off{opacity:0}
 .lx-sala-card .s-fuego{transform-box:fill-box;transform-origin:center}
 html.fx-calor .lx-sala-card .s-fuego{animation:sFuego 1.7s ease-in-out infinite}
 @keyframes sFuego{0%,100%{opacity:.85;transform:scale(1)}40%{opacity:1;transform:scale(1.06,1.1)}70%{opacity:.75;transform:scale(.97,1.02)}}
+/* Persiana en perspectiva: baja lama a lama (y sube en orden inverso), siempre detrás del sofá */
+.lx-sala-card .s-lama{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);opacity:0;transition:transform .22s ease,opacity .22s ease;transition-delay:calc((var(--n) - var(--i)) * 24ms)}
+html.fx-persianas .lx-sala-card .s-lama{transform:none;opacity:1;transition-delay:calc(var(--i) * 24ms)}
