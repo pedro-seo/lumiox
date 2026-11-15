@@ -13,7 +13,7 @@ const vh=()=>innerHeight;
 const sec=t.closest("section"),col=t.closest(".lx-pared-col")||t,r0=col.getBoundingClientRect();
 const fijar=!!sec&&innerWidth>=1024&&scrollY<40&&r0.top<vh()*.9;
 let pin=null,recorrido=0;
-function medir(){if(!pin)return;recorrido=Math.round(vh()*.9);const h=sec.offsetHeight;pin.style.height=h+recorrido+"px";sec.style.top=Math.min(0,vh()-h)+"px"}
+function medir(){if(!pin)return;recorrido=Math.round(vh()*.9);const h=sec.offsetHeight;pin.style.height=h+recorrido+"px";/* Alinea la portada por abajo, pero sin que el titular ni la escena del salón queden bajo la barra de navegación */const card=sec.querySelector(".lx-sala-card"),nav=document.querySelector(".lx-nav"),tope=(nav?nav.offsetHeight:66)+14;let top=Math.min(0,vh()-h);const st=sec.getBoundingClientRect().top,tit=sec.querySelector(".lx-hero-flex h2");const offs=[card,tit].filter(Boolean).map(e=>e.getBoundingClientRect().top-st);if(offs.length)top=Math.min(0,Math.max(top,tope-Math.min(...offs)));sec.style.top=top+"px"}
 if(fijar){pin=document.createElement("div");pin.className="lx-pin";sec.before(pin);pin.appendChild(sec);sec.classList.add("lx-pin-sec");medir()}
 const izq=pin&&[...sec.querySelectorAll(".lx-hero-flex > *")].find(e=>!e.contains(t));
 const casa=sec&&sec.querySelector(".lx-sala-card .lx-sala-zoom");

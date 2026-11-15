@@ -249,15 +249,15 @@ html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
 .lx-hero-foto .lx-ipad.lx-scrub{will-change:transform,opacity}
 /* En estas páginas los efectos ocurren en el salón, no en toda la pantalla */
 body:has(.lx-sala-card) > .lx-fx{display:none!important}
-.lx-sala-col{--bl:40px;--br:40px}
-.lx-sala-card{position:relative;z-index:0;width:calc(100% + var(--bl) + var(--br));margin-left:calc(var(--bl) * -1);aspect-ratio:800/520;border-radius:26px;overflow:hidden;
+.lx-sala-col{--bl:60px;--br:clamp(24px,calc((100vw - 1200px) / 2 - 4px),120px)}
+.lx-sala-card{position:relative;z-index:0;width:min(calc(100cqw + var(--bl) + var(--br)),calc((100vh - 420px) * 1.45));margin-left:calc(var(--bl) * -1);aspect-ratio:1.45;border-radius:26px;overflow:hidden;
   box-shadow:0 34px 80px -24px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.06)}
 .lx-sala-zoom{position:absolute;inset:0;transform:scale(1.1);transform-origin:50% 40%;will-change:transform}
 .lx-sala-zoom>img,.lx-sala-zoom>svg{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
 .lx-sala-card::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);pointer-events:none}
 /* El iPad se coloca delante, abajo a la izquierda, dejando el salón a la vista */
-.lx-sala-col .lx-panel.lx-ipad{--w:78cqw;width:var(--w);max-width:none;margin:calc((100cqw + var(--bl) + var(--br)) * -.24) 0 0 calc(var(--bl) * -1)}
-@media (min-width:769px){.lx-sala-col .lx-panel.lx-ipad{--w:min(540px,92cqw)}}
+.lx-sala-col .lx-panel.lx-ipad{--w:78cqw;width:var(--w);max-width:none;margin:calc(min(calc(100cqw + var(--bl) + var(--br)),calc((100vh - 420px) * 1.45)) * -.24) 0 0 calc(var(--bl) * -1)}
+@media (min-width:769px){.lx-sala-col .lx-panel.lx-ipad{--w:min(560px,94cqw)}}
 @media (max-width:768px){.lx-sala-col{--bl:0px;--br:0px}.lx-sala-card{border-radius:18px}.lx-sala-col .lx-panel.lx-ipad{--w:100cqw;margin:-9cqw 0 0 0}}
 /* Luces */
 .lx-sala-card .s-luz{opacity:var(--lx-pared,.84);transition:opacity .5s ease}
@@ -327,3 +327,14 @@ html.fx-persianas .lx-sala-card .s-lama{transform:none;opacity:1;transition-dela
     -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 30%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 30%,transparent 100%);
     background:linear-gradient(180deg,#0a0e1a 0%,rgba(10,14,26,.82) 32%,rgba(10,14,26,.35) 70%,rgba(10,14,26,0) 100%)}
 }
+
+/* Altavoces de techo: ondas de sonido y notas que caen */
+.lx-sala-card .s-son{transform-box:fill-box;transform-origin:center;opacity:0}
+html.fx-musica .lx-sala-card .s-son{animation:sSon 1.6s ease-out infinite}
+html.fx-musica .lx-sala-card .s-s2{animation-delay:-.8s}
+@keyframes sSon{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.lx-sala-card .s-notab{opacity:0;transform-box:fill-box}
+html.fx-musica .lx-sala-card .s-notab{animation:sNotaB 2.8s ease-in infinite}
+@keyframes sNotaB{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx,16px),110px) rotate(-14deg)}}
+/* Portátiles pequeños y tablets apaisadas: controles algo más compactos para que no se corten los nombres */
+@media (min-width:769px) and (max-width:1150px){.lx-ipad>div{padding:14px 14px 12px!important}.lx-ipad .grid{gap:6px}.lx-ipad .lx-tile{grid-template-columns:22px minmax(0,1fr);padding:8px 6px;column-gap:6px}.lx-ipad .lx-tile .lx-tile-icon{width:22px;height:22px}.lx-ipad .lx-tile .lx-tile-icon svg{width:13px;height:13px}.lx-ipad .lx-tile-nombre{font-size:11px;letter-spacing:-.1px}.lx-ipad .lx-tile-estado{font-size:9.5px}}
