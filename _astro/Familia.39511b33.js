@@ -4,7 +4,7 @@
   const termo=r.querySelector('#termo');
   const $$=s=>[...r.querySelectorAll(s)];
   let k=0,t=0,visible=true;
-  const red=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const red=matchMedia('(prefers-reduced-motion: reduce) and (max-width:0px)').matches;
   function marcar(p){
     $$('.tab-tile').forEach(e=>e.classList.toggle('on',e.dataset.t===p||r.classList.contains('m-'+e.dataset.t)));
     $$('.senal').forEach(e=>e.classList.toggle('act',e.dataset.t===p));

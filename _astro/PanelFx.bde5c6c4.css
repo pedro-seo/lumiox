@@ -59,7 +59,7 @@ html.fx-musica #fxMusica{opacity:1}
 /* Ecualizador arriba a la derecha: no pisa el texto de estado en tiles estrechos */
 .lx-panel .lx-tile .lx-eq{top:16px;bottom:auto;right:14px}
 @media (max-width:640px){.lx-rec{left:20px;bottom:86px}.lx-seg-chip{top:66px!important;font-size:11px!important;padding:6px 12px!important;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}}
-@media (prefers-reduced-motion:reduce){.lx-panel .lx-tile.lx-pop[aria-pressed=true]::after,.lx-panel .lx-tile.lx-pop[aria-pressed=true] .lx-tile-icon,.lx-rec i,#fxMusica::before{animation:none!important}#fxPersianas .lx-lamas,.lx-fx{transition-duration:.01s}}
+@media (prefers-reduced-motion:reduce) and (max-width:0px){.lx-panel .lx-tile.lx-pop[aria-pressed=true]::after,.lx-panel .lx-tile.lx-pop[aria-pressed=true] .lx-tile-icon,.lx-rec i,#fxMusica::before{animation:none!important}#fxPersianas .lx-lamas,.lx-fx{transition-duration:.01s}}
 
 /* ===== Pared de la casa (queda bajo los efectos: se oscurece, la tapan las persianas…) ===== */
 .lx-pared-col{position:relative;padding:76px 50px 44px}
@@ -111,7 +111,7 @@ html.fx-musica .lx-panel.lx-ipad::after{top:-30px}
   .lx-ipad-reflejo{inset:11px;border-radius:20px}
   .lx-ipad-cam{top:2.5px}
 }
-@media (prefers-reduced-motion:reduce){html.fx-musica .lx-panel.lx-ipad{animation:none}}
+@media (prefers-reduced-motion:reduce) and (max-width:0px){html.fx-musica .lx-panel.lx-ipad{animation:none}}
 
 
 /* ===== Pantalla de bloqueo + desbloqueo ===== */

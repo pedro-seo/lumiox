@@ -85,4 +85,4 @@
 .lx-fam .estrella:nth-child(2n){animation-delay:-1.4s}
 @keyframes titila{50%{opacity:.25}}
 
-@media (prefers-reduced-motion:reduce){.lx-fam *{animation:none!important;transition:none!important}}
+@media (prefers-reduced-motion:reduce) and (max-width:0px){.lx-fam *{animation:none!important;transition:none!important}}
