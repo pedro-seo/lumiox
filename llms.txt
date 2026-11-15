@@ -1,6 +1,6 @@
 # Lumiox
 
-> Lumiox es una empresa de domótica con sede en Barcelona que diseña e instala sistemas inteligentes (KNX, Loxone, Control4, soluciones inalámbricas Zigbee/Z-Wave y dispositivos Philips Hue, Sonos, Shelly, Aqara, Nuki y Eve) en viviendas y negocios de toda Cataluña y Andorra. Presupuesto gratuito y sin compromiso.
+> Lumiox es una empresa de domótica con sede en Barcelona que diseña e instala sistemas inteligentes (KNX, Loxone, Control4, soluciones inalámbricas Zigbee/Z-Wave y dispositivos Philips Hue, Sonos, Shelly, Aqara, Nuki, Eve, Meross y Netatmo) en viviendas y negocios de toda Cataluña y Andorra. Presupuesto gratuito y sin compromiso.
 
 - Servicios: iluminación inteligente, climatización automatizada, seguridad, persianas y toldos, audio y multimedia, gestión energética.
 - Sectores: residencial, comercial, hostelería e industrial.

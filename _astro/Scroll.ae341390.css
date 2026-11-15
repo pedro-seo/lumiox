@@ -36,3 +36,6 @@
 @media (max-width:640px){.lx-marcas-lista{gap:40px;padding:0 20px}.lx-marca b{font-size:18px}.lx-marcas-on .lx-marcas-pista{animation-duration:32s}}
 /* TEMPORAL: «Reducir movimiento» desactivado (buscar "and (max-width:0px)" para restaurarlo) */
 @media (prefers-reduced-motion:reduce) and (max-width:0px){.lx-marcas-pista{animation:none}.lx-marcas-lista[aria-hidden]{display:none}.lx-marcas-lista{flex-wrap:wrap;justify-content:center;row-gap:16px}.lx-marcas{-webkit-mask-image:none;mask-image:none}}
+/* Logos de marca como máscara: toman el color del texto (gris, blanco al pasar el ratón) */
+.lx-logo-m{display:block;flex:none;height:var(--h,26px);background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+@media (max-width:640px){.lx-logo-m{height:calc(var(--h,26px)*.85)}}
