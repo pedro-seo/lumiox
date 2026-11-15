@@ -189,8 +189,14 @@ html.fx-musica .lx-panel.lx-ipad::after{top:-30px}
 html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
 .lx-ipad>div{border-radius:calc(var(--w)*.036)!important}
 .lx-ipad-marco{position:absolute;inset:0;z-index:30;pointer-events:none;box-sizing:border-box;border-style:solid;border-color:transparent;
-  border-width:calc(var(--w)*.2528) calc(var(--w)*.1615) calc(var(--w)*.0913) calc(var(--w)*.0913);
-  border-image:url(/_astro/ipad-marco.f777c5d8.webp) 270 172 98 98 fill stretch}
+  border:0;--img:url(/_astro/ipad-marco.f777c5d8.webp);--top:calc(var(--w)*270/1068);--bot:calc(var(--w)*98/1068);
+  padding:var(--top) 0 var(--bot);background:var(--img) 0 73.37%/100% 132.51% no-repeat content-box}
+/* Marco en 3 piezas (arriba, centro estirable, abajo) con fondos normales: funciona también en Safari */
+.lx-ipad-marco::before,.lx-ipad-marco::after{content:"";position:absolute;left:0;right:0;background-image:var(--img);background-repeat:no-repeat;background-size:100% auto}
+.lx-ipad-marco::before{top:0;height:calc(var(--top) + 1px);background-position:top}
+.lx-ipad-marco::after{bottom:0;height:calc(var(--bot) + 1px);background-position:bottom}
+.lx-panel.lx-ipad{aspect-ratio:1068/1500;display:flex;flex-direction:column}
+.lx-ipad>div{flex:1 0 auto}
 .lx-ipad-cam,.lx-ipad-boton,.lx-ipad-vol{display:none}
 .lx-ipad-reflejo{inset:calc(var(--w)*.0576) calc(var(--w)*.0548) calc(var(--w)*.0569) calc(var(--w)*.0555);border-radius:calc(var(--w)*.036)}
 @media (max-width:640px){.lx-ipad>div{padding:16px!important}}
@@ -215,9 +221,8 @@ html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
     border-radius:calc(var(--w)*.07);display:flex;flex-direction:column}
   @supports (width:1cqw){.lx-panel.lx-ipad{--w:min(600px,100cqw)}}
   html .lx-panel.lx-ipad{border-radius:calc(var(--w)*.07)}
-  .lx-ipad>div{flex:1;border-radius:calc(var(--w)*.026)!important;padding:18px 20px 14px!important}
-  .lx-ipad-marco{border-width:calc(var(--w)*.12) calc(var(--w)*.09) calc(var(--w)*.09) calc(var(--w)*.09);
-    border-image:url(/_astro/ipad-marco-h.a4151fc5.webp) 168 126 126 126 fill stretch}
+  .lx-ipad>div{flex:1 0 auto;border-radius:calc(var(--w)*.026)!important;padding:18px 20px 14px!important}
+  .lx-ipad-marco{--img:url(/_astro/ipad-marco-h.a4151fc5.webp);--top:calc(var(--w)*168/1400);--bot:calc(var(--w)*126/1400);background-position:0 57.2%;background-size:100% 141.82%}
   .lx-ipad-reflejo{inset:calc(var(--w)*.0395) calc(var(--w)*.0415) calc(var(--w)*.04) calc(var(--w)*.041);border-radius:calc(var(--w)*.026)}
   .lx-ipad .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
   .lx-ipad .lx-tile{display:grid;grid-template-columns:26px minmax(0,1fr);column-gap:8px;row-gap:0;align-items:center;padding:9px 8px}
