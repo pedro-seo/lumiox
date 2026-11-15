@@ -317,15 +317,19 @@ html.fx-calor .lx-sala-card .s-fuego{animation:sFuego 1.7s ease-in-out infinite}
 /* Persiana en perspectiva: baja lama a lama (y sube en orden inverso), siempre detrás del sofá */
 .lx-sala-card .s-lama{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);opacity:0;transition:transform .22s ease,opacity .22s ease;transition-delay:calc((var(--n) - var(--i)) * 24ms)}
 html.fx-persianas .lx-sala-card .s-lama{transform:none;opacity:1;transition-delay:calc(var(--i) * 24ms)}
-/* Móvil: el salón ocupa todo el ancho y sube por detrás de las cifras, fundiéndose con un desenfoque */
+/* Móvil: el salón ocupa todo el ancho; encima, una prolongación desenfocada de la foto la funde con las cifras
+   (la foto se ve entera y nítida: techo, focos y cámaras incluidos) */
 @media (max-width:768px){
   .lx-hero-foto .lx-sala-col{padding-top:0}
-  .lx-sala-card{width:100vw;margin-left:calc(50% - 50vw);margin-top:-120px;aspect-ratio:1.35;border-radius:0;box-shadow:none}
-  .lx-sala-card::after{display:none}
-  .lx-sala-card::before{content:"";position:absolute;left:0;right:0;top:0;height:52%;z-index:2;pointer-events:none;
-    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 30%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 30%,transparent 100%);
-    background:linear-gradient(180deg,#0a0e1a 0%,rgba(10,14,26,.82) 32%,rgba(10,14,26,.35) 70%,rgba(10,14,26,0) 100%)}
+  .lx-sala-card{--fx:110px;width:100vw;margin-left:calc(50% - 50vw);margin-top:calc(var(--fx) * -1);aspect-ratio:auto;height:calc(100vw / 1.35 + var(--fx));border-radius:0;box-shadow:none;background:#0a0e1a}
+  .lx-sala-zoom{inset:var(--fx) 0 0 0}
+  .lx-sala-zoom::after{content:"";position:absolute;left:0;right:0;top:0;height:34px;z-index:3;pointer-events:none;
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
+  .lx-sala-card::before{content:"";position:absolute;left:-30px;right:-30px;top:0;height:calc(var(--fx) + 20px);z-index:0;pointer-events:none;
+    background:url(/_astro/salon2-700.d9a32ca8.webp) center top/100% auto no-repeat;transform:scaleY(-1);filter:blur(14px) saturate(.9);opacity:1}
+  .lx-sala-card::after{display:block;content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--fx) + 70px);z-index:4;pointer-events:none;border-radius:0;box-shadow:none;
+    background:linear-gradient(180deg,#0a0e1a 0%,rgba(10,14,26,.8) 28%,rgba(10,14,26,.4) 55%,rgba(10,14,26,.14) 78%,rgba(10,14,26,0) 100%)}
 }
 
 /* Altavoces de techo: ondas de sonido y notas que caen */
