@@ -86,3 +86,19 @@
 @keyframes titila{50%{opacity:.25}}
 
 @media (prefers-reduced-motion:reduce) and (max-width:0px){.lx-fam *{animation:none!important;transition:none!important}}
+
+/* ===== Scroll: la escena se queda fija y avanza paso a paso ===== */
+section.lx-sol{overflow:clip}
+.lx-fam-track{position:relative;height:340vh}
+.lx-fam-sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:64px;box-sizing:border-box}
+.lx-fam-track .lx-fam{margin-bottom:0;max-width:min(900px,calc((100vh - 300px)*1.818))}
+@supports (height:100svh){.lx-fam-track .lx-fam{max-width:min(900px,calc((100svh - 300px)*1.818))}}
+.lx-fam-escena{transform-origin:50% 60%;will-change:transform}
+.lx-fam-txt{min-height:1.2em;margin:0 auto 24px;text-align:center;font-weight:800;font-size:clamp(22px,3.1vw,40px);letter-spacing:-.02em;line-height:1.15;color:#fff;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+.lx-fam-txt.in{opacity:1;transform:none}
+.lx-fam-track+.lx-grid3{margin-top:24px}
+.lx-fam-track-off{height:auto}.lx-fam-track-off .lx-fam-sticky{position:static;height:auto;padding-top:0}
+@media (max-width:640px){
+  .lx-fam-track{height:300vh}
+  .lx-fam-txt{font-size:23px;min-height:2.3em;margin-bottom:16px;padding:0 8px}
+}
