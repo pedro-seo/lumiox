@@ -5,6 +5,12 @@
 (()=>{
   // TEMPORAL: «Reducir movimiento» desactivado en toda la web (buscar "and (max-width:0px)" para restaurarlo)
   const RED=matchMedia('(prefers-reduced-motion: reduce) and (max-width:0px)').matches;
+  // Franja de marcas: duplica la lista (oculta a lectores y buscadores) para que la cinta sea continua
+  if(!RED)document.querySelectorAll('.lx-marcas-pista').forEach(p=>{
+    const l=p.querySelector('.lx-marcas-lista');if(!l)return;
+    const c=l.cloneNode(true);c.setAttribute('aria-hidden','true');c.querySelectorAll('.lx-sr').forEach(e=>e.remove());
+    p.append(c);p.parentElement.classList.add('lx-marcas-on');
+  });
   if(RED)return;
   const cl=v=>v<0?0:v>1?1:v;
   const ease=t=>1-Math.pow(1-t,3);
