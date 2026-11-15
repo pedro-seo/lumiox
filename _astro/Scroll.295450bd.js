@@ -32,6 +32,10 @@
     });
   });
 
+  // Detección automática en todas las páginas
+  document.querySelectorAll('#proceso .lx-grid4').forEach(g=>{if(!g.hasAttribute('data-sx-steps'))g.setAttribute('data-sx-steps','')});
+  document.querySelectorAll('.lx-grid4').forEach(g=>{if(g.querySelector(':scope > .overflow-hidden > img.object-cover'))g.setAttribute('data-sx-zoom','')});
+
   // Títulos de sección y rejillas de tarjetas que aún no tienen efecto: aparición suave al subir
   document.querySelectorAll('section .lx-sh, section .lx-grid2, section .lx-grid3, section .lx-grid4').forEach(el=>{
     if(!el.hasAttribute('data-sx-rise')&&!el.hasAttribute('data-sx-steps')&&!el.closest('[data-sx-rise]'))el.setAttribute('data-sx-rise','');
@@ -85,7 +89,7 @@
       if(manual)return;
       const r=ba.getBoundingClientRect();
       if(r.top>vh||r.bottom<0)return;
-      const c=ease(cl((vh*.95-r.top)/(vh*.6)));
+      const t=cl((vh*.58-r.top)/(vh*.5)),c=t*t*(3-2*t);      // empieza cuando la foto ya está bien a la vista
       const v=Math.round(6+c*84);
       rng.value=v;top.style.clipPath=`inset(0 ${100-v}% 0 0)`;ln.style.left=v+'%';
     });
