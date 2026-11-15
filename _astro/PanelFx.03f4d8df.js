@@ -16,7 +16,7 @@ let pin=null,recorrido=0;
 function medir(){if(!pin)return;recorrido=Math.round(vh()*.9);const h=sec.offsetHeight;pin.style.height=h+recorrido+"px";sec.style.top=Math.min(0,vh()-h)+"px"}
 if(fijar){pin=document.createElement("div");pin.className="lx-pin";sec.before(pin);pin.appendChild(sec);sec.classList.add("lx-pin-sec");medir()}
 const izq=pin&&[...sec.querySelectorAll(".lx-hero-flex > *")].find(e=>!e.contains(t));
-const casa=sec&&sec.querySelector(".lx-hero-casa img");
+const casa=sec&&sec.querySelector(".lx-sala-card svg");
 function objetivo(){
  if(pin){const y=scrollY-pin.offsetTop;return cl(y/recorrido)}
  const r=col.getBoundingClientRect();return cl((vh()*1.02-r.top)/(vh()*.72))
@@ -28,7 +28,7 @@ function pintar(p){
  const e=eo(seg(p,0,.55));
  t.style.transform=`translate3d(0,${((1-e)*240).toFixed(1)}px,0) scale(${(.93+.07*e).toFixed(4)})`;
  t.style.opacity=seg(p,0,.38).toFixed(3);
- if(casa)casa.style.transform=`scale(${(1.12-.08*eo(p)).toFixed(4)})`;
+ if(casa)casa.style.transform=`scale(${(1.1-.1*eo(p)).toFixed(4)})`;
  if(izq){const k=seg(p,.55,1);izq.style.transform=`translate3d(0,${-k*26}px,0)`;izq.style.opacity=(1-k*.18).toFixed(3)}
  if(hecho)return;
  orden.forEach((el,k)=>{const a=.42+k*(.38/N);el.style.setProperty("--rv",eo(seg(p,a,a+.2)).toFixed(3))});
@@ -57,3 +57,5 @@ addEventListener("scroll",onScroll,{passive:!0});
 addEventListener("resize",()=>{medir();onScroll()},{passive:!0});
 pintar(cur);esperar();
 })(),T(),t.classList.add("lx-listo")})();
+/* Termostato del salón: muestra la misma temperatura que el iPad */
+(()=>{const s=document.getElementById("salaTemp"),t=document.getElementById("lxTempCalor");if(!s||!t)return;const f=()=>{s.textContent=t.textContent.trim()+"°"};f();new MutationObserver(f).observe(t,{childList:!0,characterData:!0,subtree:!0})})();
